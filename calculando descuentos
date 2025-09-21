@@ -1,1 +1,69 @@
+def calcular_descuento(monto_total, porcentaje_descuento=10):
+    """
+    calcula el descuento sobre un monto total de compra con una validación de entrada
+    
+    Args:
+        monto_total (float): El monto total de la compra
+        porcentaje_descuento (float, optional): Porcentaje de descuento, Por defecto 10%
+    
+    Returns:
+        tuple: (monto_descuento, monto_final) o (None, None) si los datos son inválidos
+    """
+    # Validamos que el monto y el porcentaje sean válidos
+    if not isinstance(monto_total, (int, float)) or monto_total < 0:
+        print("error: El monto total debe ser un número positivo")
+        return None, None
+    if not isinstance(porcentaje_descuento, (int, float)) or porcentaje_descuento < 0 or porcentaje_descuento > 100:
+        print("error: El porcentaje de descuento debe estar entre 0 y 100")
+        return None, None
 
+    # calculamos el descuento y el monto final
+    monto_descuento = monto_total * (porcentaje_descuento / 100)
+    monto_final = monto_total - monto_descuento
+    
+    return monto_descuento, monto_final
+
+def main():
+    """
+    función principal que demuestra el uso de calcular_descuento con casos predefinidos
+    y una opción interactiva para el usuario
+    """
+    # compra 1: usando el porcentaje de descuento predeterminado (10%)
+    monto_compra1 = 2000.00
+    descuento1, final1 = calcular_descuento(monto_compra1)
+    if descuento1 is not None:
+        print("Compra 1 (Descuento predeterminado):")
+        print(f"Monto original: ${monto_compra1:.2f}")
+        print(f"Descuento (10%): ${descuento1:.2f}")
+        print(f"Monto final a pagar: ${final1:.2f}\n")
+
+    #compra 2: especificando un porcentaje de descuento personalizado (20%)
+    monto_compra2 = 500.00
+    porcentaje_personalizado = 20
+    descuento2, final2 = calcular_descuento(monto_compra2, porcentaje_personalizado)
+    if descuento2 is not None:
+        print("Compra 2 (Descuento personalizado):")
+        print(f"Monto original: ${monto_compra2:.2f}")
+        print(f"Descuento ({porcentaje_personalizado}%): ${descuento2:.2f}")
+        print(f"Monto final a pagar: ${final2:.2f}\n")
+
+    # compra 3: entrada interactiva del usuario
+    try:
+        print("Compra 3 - interactivo")
+        monto_usuario = float(input("Ingrese el monto total de la compra: $"))
+        usar_default = input("¿Usar descuento predeterminado (10%)? (sí/no): ").lower()
+        if usar_default == 'sí' or usar_default == 'si':
+            descuento3, final3 = calcular_descuento(monto_usuario)
+        else:
+            porcentaje_usuario = float(input("Ingrese el porcentaje de descuento: "))
+            descuento3, final3 = calcular_descuento(monto_usuario, porcentaje_usuario)
+        
+        if descuento3 is not None:
+            print(f"Monto original: ${monto_usuario:.2f}")
+            print(f"Descuento: ${descuento3:.2f}")
+            print(f"Monto final a pagar: ${final3:.2f}")
+    except ValueError:
+        print("error: Ingrese valores numéricos válidos")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,22 @@
+
+# creo un archivo llamado my_notes.txt en modo escritura ("w"), lo cual me va a permitir escribir dentro de este mismo
+with open("my_notes.txt", "w") as file:
+    file.write("1°: Un robloxito o que? \n")
+    file.write("2°: Cuando dan chamba? \n")
+    file.write("3°: Opeth es la besto banda metalera \n")
+    file.write("4°: Soy el vigilanteeee \n")
+    file.write("5°: Me gusta la comida que me hace mi novia, ella e de master chef uff \n")
+
+# se abrira el archivo en modo lectura ("r") para poder leer lo que esta escrito
+file = open("my_notes.txt", "r")
+
+# con este se leera la primera linea del codigo
+line = file.readline()
+
+# se iran mostrando una en una
+while line:
+    print(line.strip())
+    line = file.readline()  # para leer la siguiente línea
+
+# se termina el proceso
+file.close()
